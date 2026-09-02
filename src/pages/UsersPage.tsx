@@ -1,4 +1,5 @@
 import AddIcon from "@mui/icons-material/Add";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -63,7 +64,16 @@ export function UsersPage() {
         </Stack>
 
         <AsyncState loading={loading} error={error} empty={!users.length}>
-          <Stack spacing={2}>
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "1fr",
+                md: "repeat(2, minmax(0, 1fr))",
+              },
+              gap: 2,
+            }}
+          >
             {users.map((user) => (
               <UserCard
                 key={user.id}
@@ -72,7 +82,7 @@ export function UsersPage() {
                 onDelete={handleDelete}
               />
             ))}
-          </Stack>
+          </Box>
         </AsyncState>
       </Stack>
 

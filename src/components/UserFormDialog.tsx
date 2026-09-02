@@ -7,6 +7,7 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 import type { NewUser } from "../services/userService";
+import "../assets/css/UserFormDialog.css";
 
 type UserFormDialogProps = {
   open: boolean;
@@ -56,10 +57,18 @@ export function UserFormDialog({
     form.email.includes("@");
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
+    <Dialog
+      open={open}
+      onClose={onClose}
+      fullWidth
+      maxWidth="sm"
+      slotProps={{ paper: { className: "dialogPaper" } }}
+    >
       <form onSubmit={handleSubmit}>
-        <DialogTitle>{title}</DialogTitle>
-        <DialogContent>
+        <DialogTitle className="dialogTitle">
+          <span className="titleText">{title}</span>
+        </DialogTitle>
+        <DialogContent className="dialogContent">
           <Stack spacing={2} sx={{ pt: 1 }}>
             <TextField
               label="Nombre"
@@ -86,11 +95,16 @@ export function UserFormDialog({
             />
           </Stack>
         </DialogContent>
-        <DialogActions sx={{ px: 3, pb: 2 }}>
-          <Button onClick={onClose} disabled={saving}>
+        <DialogActions className="dialogActions">
+          <Button className="cancelBtn" onClick={onClose} disabled={saving}>
             Cancelar
           </Button>
-          <Button type="submit" variant="contained" disabled={!valid || saving}>
+          <Button
+            className="saveBtn"
+            type="submit"
+            variant="contained"
+            disabled={!valid || saving}
+          >
             {saving ? "Guardando…" : "Guardar"}
           </Button>
         </DialogActions>
